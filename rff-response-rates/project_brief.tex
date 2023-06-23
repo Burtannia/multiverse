@@ -1,0 +1,111 @@
+\documentclass[12pt]{scrartcl}
+
+\begin{document}
+\title{Project Brief}
+\subtitle{Optimise Request for Feedback Schedules to\\
+Maximise Response Rates and Quality at SoPost}
+\author{James Burton\\SoPost\\jburton@sopost.com}
+\maketitle
+
+\section{Background and Motivation}
+
+Over SoPost's 10 years of operation it has gathered a plethora of data regarding
+the performance of various sampling campaigns. For context, a typical campaign
+follows three stages:
+
+\begin{enumerate}
+    \item Claim: Samples are being claimed by consumers.
+    \item Feedback: SoPost is gathering feedback from consumers regarding the sample.
+    \item Purchase: Emails are sent to drive the consumers to purchase a full product.
+\end{enumerate}
+
+One of the key factors that sets SoPost apart from its competitors is the
+aforementioned wealth of information, knowledge and experience that allows
+SoPost to position itself, not just as a sampling platform, but as a sampling
+consultant.
+
+For the purposes of this project, we are interested in data gathered surrounding
+the "Feedback" stage of a campaign. When comparing the performance of campaigns,
+one metric that gets used frequently is the Request for Feedback (RFF) response rate.
+For example if RFFs are sent to 1000 consumers and we receive 70 responses then the
+response rate would be 0.07 or 7\%.
+
+SoPost is interested in using its historic data to determine how factors such
+as day of the week affect the response rate of RFF emails. As an example, one
+might imagine that Mondays are a bad day to send emails since most people are
+busy dealing with tasks at the start of a new week or handling issues that arose
+over the weekend. Having insights such as this would allow SoPost to advise brands
+on the best options when configuring a campaign and further cement SoPost as "the
+sampling experts".
+
+The Head of Innovation at SoPost has expressed particular interest in the outcome
+of this project and will serve as a key stakeholder throughout its duration.
+
+\section{Project Outcomes}
+
+In this section we shall outline what we hope to achieve with this project by using
+the OKR framework and defining our objectives as measured by various key results.\\
+
+\textbf{O1}: Determine the best day of the week for sending RFFs to maximise response rates.
+\begin{itemize}
+    \item KR1: Identify relevant data from SoPost and any necessary external sources.
+    \item KR2: Produce a dashboard in Looker Studio showing average response rates
+        per day of the week and providing various filters.
+    \item KR3: Train a predictive model which takes into account many factors at once
+        such time between sample claim and RFF send.
+    \item KR4: Produce a report for key stakeholders.
+\end{itemize}
+
+\textbf{O2} (Stretch): Gain similar insights optimising for metrics other than response rate.
+\begin{itemize}
+    \item KR4: Repeat analysis optimising for review sentiment.
+    \item KR5a: Produce an appropriate method for measuring review quality.
+    \item KR5b: Repeat analysis optimising for review quality.
+\end{itemize}
+
+\section{The Data}
+
+This section defines the data requirements of this project. We have divided
+the discussion further into two, firstly discussing the internal data that
+we shall be using from SoPost and secondly any external data we shall require.
+
+\subsection{Internal Data}
+
+SoPost uses Google BigQuery as a data warehouse, this shall be our internal data source
+for this project. One significant advantage in taking our data from BigQuery is that
+we do not store any personal information in there meaning that GDPR concerns have already
+been handled for us.
+
+The data that we shall be mainly focused on is the `review' table which has the following
+schema.
+% regarding SoPost data we have
+%   sample type/size
+%   product type
+%   sampling platform
+%   various demographics about respondants
+%   datetimes of RFF emails being sent
+%   datetimes of responses
+%   can analyse quality of responses (how detailed)
+%   can analyse positivity of responses
+
+% timeliness of data is important e.g. lockdowns, bank holdiays etc. think locale too
+
+
+\subsection{External Data}
+https://www.kaggle.com/datasets/jcyzag/covid19-lockdown-dates-by-country
+https://learn.microsoft.com/en-us/azure/open-datasets/dataset-public-holidays?tabs=azureml-opendatasets
+% records of lockdowns by country from public data
+% records of public holidays by country
+
+\section{Project Plan}
+
+% Create a view with all the data we need from SoPost
+% Load external data into an accessible source e.g. CSV
+% Analyse data for cleanliness etc.
+% Use Looker studio to produce some basic visualisations with filters
+% Research more relevant statistical analysis models or machine learning
+    % data mining?
+% Produce a predictive model and find which factors are relevant
+% Produce a report for stakeholders
+
+\end{document}
