@@ -1,0 +1,51 @@
+[project]
+name = "mv_python"
+version = "1.0.0"
+description = "Multiverse Python projects"
+authors = [
+    { name = "James Burton", email = "jburton@sopost.com" },
+]
+
+dependencies = [
+    "pydantic ~= 2.0.2",
+    "urllib3 ~= 2.0.3",
+    "requests ~= 2.31.0",
+    "rich ~= 13.4.2",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest ~= 7.4.0",
+    "hypothesis ~= 6.80.0",
+]
+
+dev = [
+    "black ~= 23.3.0",
+    "pyright ~= 1.1.316",
+    "isort ~= 5.12.0",
+    "mypy ~= 1.4.1",
+    "pip-tools ~= 6.14.0",
+]
+
+[tool.setuptools]
+packages = ["mv_python"]
+
+[tool.pyright]
+strict = ["**/*"]
+
+reportShadowedImports = "warning"
+
+[tool.mypy]
+plugins = [
+  "pydantic.mypy"
+]
+
+strict = true
+disallow_any_expr = true
+disallow_any_decorated = true
+disallow_any_explicit = true
+
+[tool.pydantic-mypy]
+init_typed = true
+warn_required_dynamic_aliases = true
+warn_untyped_fields = true
