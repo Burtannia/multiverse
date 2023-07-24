@@ -1,6 +1,8 @@
 \documentclass[12pt]{scrartcl}
 
 \begin{document}
+\bibliographystyle{acm}
+
 \title{Project Brief}
 \subtitle{Optimise Request for Feedback Schedules to\\
 Maximise Response Rates and Quality at SoPost}
@@ -41,7 +43,8 @@ sampling experts".
 The Head of Innovation at SoPost has expressed particular interest in the outcome
 of this project and will serve as a key stakeholder throughout its duration.
 
-\section{Project Outcomes}
+\section{Project Objectives}
+\label{section:objectives}
 
 In this section we shall outline what we hope to achieve with this project by using
 the OKR framework and defining our objectives as measured by various key results.\\
@@ -76,8 +79,51 @@ for this project. One significant advantage in taking our data from BigQuery is 
 we do not store any personal information in there meaning that GDPR concerns have already
 been handled for us.
 
-The data that we shall be mainly focused on is the `review' table which has the following
-schema.
+There are two tables we shall be primarily focusing on. The first of theses tables is
+\texttt{scheduled\_notifications}
+which contains the scheduled send times for both RFF and Request for Purchase (RFP) emails.
+The second table is the \texttt{review} table which which can be used to join on other tables
+to obtain various details about the product type. The schemas for these tables can be found
+in Figures \ref{schema:scheduled_notifications} and \ref{schema:review}.
+
+\begin{figure}
+    \centering
+    \begin{tabular}{ |c||c|c| }
+        \hline
+        \textbf{Field} & \textbf{Type} & \textbf{Mode} \\
+        \hline
+        count & INTEGER & NULLABLE \\
+        campaign\_id & STRING & NULLABLE \\
+        activity\_id & STRING & NULLABLE \\
+        event\_type & STRING & NULLABLE \\
+        event\_date & TIMESTAMP & NULLABLE \\
+        \hline
+    \end{tabular}
+    \caption{Schema of the \texttt{scheduled\_notifications} table.}
+    \label{schema:scheduled_notifications}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{tabular}{ |c||c|c| }
+        \hline
+        \textbf{Field} & \textbf{Type} & \textbf{Mode} \\
+        \hline
+        id & STRING & REQUIRED \\
+        order\_id & STRING & REQUIRED \\
+        product\_id & STRING & REQUIRED \\
+        activity\_id & STRING & REQUIRED \\
+        campaign\_id & STRING & NULLABLE \\
+        questions & JSON & NULLABLE \\
+        created & TIMESTAMP & NULLABLE \\
+        cluster & STRING & NULLABLE \\
+        \hline
+    \end{tabular}
+    \caption{Schema of the \texttt{review} table.}
+    \label{schema:review}
+\end{figure}
+
+
 % regarding SoPost data we have
 %   sample type/size
 %   product type
@@ -92,12 +138,18 @@ schema.
 
 
 \subsection{External Data}
-https://www.kaggle.com/datasets/jcyzag/covid19-lockdown-dates-by-country
-https://learn.microsoft.com/en-us/azure/open-datasets/dataset-public-holidays?tabs=azureml-opendatasets
-% records of lockdowns by country from public data
-% records of public holidays by country
 
-\section{Project Plan}
+While SoPost can provide the majority of the data we will need for our
+analysis there are two issues which require the use of external data to solve.
+The first is that countries have public holidays which may affect response
+rates on the given days. Secondly, during 2020 and 2021 various countries
+experienced varying levels of lockdown in response to the COVID-19 pandemic.
+
+We shall decide what to do about these dates later in the project but we
+must first obtain data to actually identify when those affected dates were.
+With respect to public holidays, Microsoft provides an open dataset \cite{ms:public-hols}.
+As for lockdown data, a quick search shows that Kaggle provides the following
+dataset \cite{kaggle:lockdowns}.
 
 % Create a view with all the data we need from SoPost
 % Load external data into an accessible source e.g. CSV
@@ -107,5 +159,7 @@ https://learn.microsoft.com/en-us/azure/open-datasets/dataset-public-holidays?ta
     % data mining?
 % Produce a predictive model and find which factors are relevant
 % Produce a report for stakeholders
+
+\bibliography{refs}
 
 \end{document}
